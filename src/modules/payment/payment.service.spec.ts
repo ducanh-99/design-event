@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentService } from './payment.service';
+import { CreatePaymentDto } from './dto/payment-dto';
 
 describe('PaymentService', () => {
   let service: PaymentService;
@@ -14,5 +15,23 @@ describe('PaymentService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+  describe('pay', () => {
+    it('should call stripe.createCharge and repository.update', () => {
+      const createPaymentDto: CreatePaymentDto = {
+        amount: '1000',
+        userId: '1',
+        bookingId: '1',
+      };
+      const stripeCreateChargeSpy = jest.spyOn(service.stripe, 'createCharge');
+      const repositoryUpdateSpy = jest.spyOn(service.repository, 'update');
+
+      service.pay(createPaymentDto);
+
+      expect(stripeCreateChargeSpy).toHaveBeenCalled();
+      expect(repositoryUpdateSpy).toHaveBeenCalledWith(
+        expect.stringContaining('PaymentService'),
+      );
+    });
   });
 });
