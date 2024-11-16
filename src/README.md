@@ -42,4 +42,13 @@ Content-Type: application/json
 }
 ```
 
-##
+### Payment Feature
+
+1. **Processing a Payment**:
+   - Endpoint: `POST /pay`
+   - The user sends a request to process a payment with the necessary details (userId, eventId, amount, currency, source).
+   - The `PaymentService` handles the payment processing using Stripe.
+   - The `stripe.createCharge` method is called to create a charge.
+   - The payment status is updated in the repository.
+
+
