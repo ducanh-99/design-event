@@ -59,6 +59,8 @@ Return JSON:
 ]
 ```
 
+#### Booking event
+
 - POST /booking
 
 ```
@@ -67,6 +69,7 @@ Return JSON:
     "eventId: string
 }
 ```
+#### Payment
 
 - POST /pay
 
@@ -83,8 +86,11 @@ pay (
 ### 4. Database design
 
 **Users** → **Bookings**: One user can have multiple bookings.
+
 **Events** → **Bookings**: One event can have multiple bookings.
+
 **Bookings** → **Payments**: Each booking has one associated payment.
+
 **Users** → **Notifications**: One user can receive multiple notifications related to various events.
 
 ![Database Design](database.png)
