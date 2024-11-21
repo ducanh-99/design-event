@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
+import { beforeEach, describe, expect, it, vitest } from 'vitest';
 
 describe('BookingService', () => {
   let service: BookingService;
@@ -11,7 +12,7 @@ describe('BookingService', () => {
     }).compile();
 
     service = module.get<BookingService>(BookingService);
-    service.kafka = { send: jest.fn() };
+    service.kafka = { send: vitest.fn() };
   });
 
   it('should be defined', () => {

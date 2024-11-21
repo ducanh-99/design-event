@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrderProcessorService } from './order-processor.service';
 import { Booking } from '../booking/entities/booking.entity';
+import { beforeEach, describe, expect, it, vitest } from 'vitest';
 
 describe('OrderProcessorService', () => {
   let service: OrderProcessorService;
@@ -11,8 +12,8 @@ describe('OrderProcessorService', () => {
     }).compile();
 
     service = module.get<OrderProcessorService>(OrderProcessorService);
-    service.kafka = { send: jest.fn() };
-    service.bookingRepository = { updateStatus: jest.fn() };
+    service.kafka = { send: vitest.fn() };
+    service.bookingRepository = { updateStatus: vitest.fn() };
   });
 
   it('should be defined', () => {
@@ -27,7 +28,7 @@ describe('OrderProcessorService', () => {
     bookingDatabase.eventId = '1';
     bookingDatabase.status = 'pending';
 
-    jest.spyOn(service, 'isRemainTickets').mockReturnValue(true);
+    vitest.spyOn(service, 'isRemainTickets').mockReturnValue(true);
 
     service.consumeBooking(bookingId);
 

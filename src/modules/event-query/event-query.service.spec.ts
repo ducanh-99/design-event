@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventQueryService } from './event-query.service';
+import { beforeEach, describe, expect, it, vitest } from 'vitest';
 
 describe('EventQueryService', () => {
   let service: EventQueryService;
@@ -10,7 +11,7 @@ describe('EventQueryService', () => {
     }).compile();
 
     service = module.get<EventQueryService>(EventQueryService);
-    service.repository = { find: jest.fn() };
+    service.repository = { find: vitest.fn() };
   });
 
   it('should be defined', () => {
@@ -20,8 +21,8 @@ describe('EventQueryService', () => {
   describe('get', () => {
     it('should return the result from cache if available', () => {
       const expectedResult = 'CachedEvent';
-      jest.spyOn(service.cache, 'get').mockReturnValue(expectedResult);
-      jest.spyOn(service.repository, 'find');
+      vitest.spyOn(service.cache, 'get').mockReturnValue(expectedResult);
+      vitest.spyOn(service.repository, 'find');
 
       const result = service.get();
       expect(result).toBe(expectedResult);
@@ -31,9 +32,9 @@ describe('EventQueryService', () => {
 
     it('should return the result from repository if cache is empty', () => {
       const expectedResult = 'RepositoryEvent';
-      jest.spyOn(service.cache, 'get').mockReturnValue(null);
-      jest.spyOn(service.repository, 'find').mockReturnValue(expectedResult);
-      const cacheSetSpy = jest.spyOn(service.cache, 'set');
+      vitest.spyOn(service.cache, 'get').mockReturnValue(null);
+      vitest.spyOn(service.repository, 'find').mockReturnValue(expectedResult);
+      const cacheSetSpy = vitest.spyOn(service.cache, 'set');
 
       const result = service.get();
       expect(result).toBe(expectedResult);

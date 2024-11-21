@@ -51,4 +51,7 @@ export const env = {
     db: envVars.REDIS_DB,
     username: envVars.REDIS_USERNAME,
   },
+  kafka: {
+    broker: 'localhost:39092',
+  },
 };

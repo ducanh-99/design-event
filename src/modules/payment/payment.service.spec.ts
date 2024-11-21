@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/payment-dto';
+import { expect, vitest } from 'vitest';
 
 describe('PaymentService', () => {
   let service: PaymentService;
@@ -23,8 +24,11 @@ describe('PaymentService', () => {
         userId: '1',
         bookingId: '1',
       };
-      const stripeCreateChargeSpy = jest.spyOn(service.stripe, 'createCharge');
-      const repositoryUpdateSpy = jest.spyOn(service.repository, 'update');
+      const stripeCreateChargeSpy = vitest.spyOn(
+        service.stripe,
+        'createCharge',
+      );
+      const repositoryUpdateSpy = vitest.spyOn(service.repository, 'update');
 
       service.pay(createPaymentDto);
 
