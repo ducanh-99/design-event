@@ -1,4 +1,12 @@
+import { IsInt, IsPositive } from 'class-validator';
+
 export class CreateBookingDto {
-  userId: string;
-  eventId: string;
+  @IsInt()
+  userId: number;
+
+  @IsInt()
+  eventId: number;
+
+  @IsPositive()
+  quantity: number;
 }

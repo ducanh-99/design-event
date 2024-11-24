@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/payment-dto';
-import { expect, vitest } from 'vitest';
+import { beforeEach, describe, expect, it, vitest } from 'vitest';
 
 describe('PaymentService', () => {
   let service: PaymentService;

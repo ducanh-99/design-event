@@ -21,7 +21,7 @@ export default defineConfig({
     },
     reporters: 'default',
     include: ['**/*.spec.ts'],
-    globals: true
+    globals: true,
   },
   root: '.',
   resolve: {
